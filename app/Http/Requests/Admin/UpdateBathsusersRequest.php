@@ -3,7 +3,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreBathsRequest extends FormRequest
+class UpdateBathsusersRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,13 @@ class StoreBathsRequest extends FormRequest
     public function rules()
     {
         return [
-            'code_qr' => 'required',
-            'company' => 'required',    
+            'bath_id' => 'required',
+            'photo' => 'nullable|mimes:png,jpg,jpeg,gif',
+            'time_entry' => 'required',
+            'time_exit' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'longitude' => 'company',
         ];
     }
 }

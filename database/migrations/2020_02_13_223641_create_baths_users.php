@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBath extends Migration
+class CreateBathsUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,15 @@ class CreateBath extends Migration
      */
     public function up()
     {
-        if(! Schema::hasTable('baths')) {
-            Schema::create('baths', function (Blueprint $table) {
+        if(! Schema::hasTable('bathsusers')) {
+            Schema::create('bathsusers', function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('code_qr');
-                $table->string('company');
-                
+                $table->string('photo');
+                $table->dateTime('time_entry');
+                $table->dateTime('time_exit');
+                $table->string('latitude');
+                $table->string('longitude');
+
                 $table->timestamps();
                 $table->softDeletes();
 
@@ -34,6 +37,6 @@ class CreateBath extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('baths');
+        Schema::dropIfExists('bathsusers');
     }
 }

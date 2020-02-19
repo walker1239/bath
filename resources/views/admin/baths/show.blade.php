@@ -12,17 +12,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <table class="table table-bordered table-striped">
+
                         <tr>
-                            <th>@lang('latitud')</th>
-                            <td field-key='latitude'>{{ $bath->latitude }}</td>
+                             <th>@lang('Codigo QR')</th>
+                            <td field-key='code_qr'>{{ $bath->code_qr }}</td>
                         </tr>
                         <tr>
-                            <th>@lang('logitud')</th>
-                            <td field-key='longitude'>{{ $bath->longitude }}</td>
-                        </tr>
-                        <tr>
-                            <th>@lang('codigo_qr')</th>
-                            <td field-key='code_qr'>@if($bath->code_qr)<a href="{{ asset(env('UPLOAD_PATH').'/' . $bath->code_qr) }}" target="_blank"><img src="{{ asset(env('UPLOAD_PATH').'/thumb/' . $bath->code_qr) }}"/></a>@endif</td>
+                             <th>@lang('Compañia')</th>
+                            <td field-key='company'>{{ $bath->company }}</td>
                         </tr>
                     </table>
                 </div>

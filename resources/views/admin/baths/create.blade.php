@@ -12,39 +12,24 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('latitude', trans('Latitud').'*', ['class' => 'control-label']) !!}
-                    {!! Form::text('latitude', old('latitude'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('latitude'))
-                        <p class="help-block">
-                            {{ $errors->first('latitude') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('longitude', trans('Longitud').'*', ['class' => 'control-label']) !!}
-                    {!! Form::text('longitude', old('longitude'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('longitude'))
-                        <p class="help-block">
-                            {{ $errors->first('longitude') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('code_qr', trans('global.baths.fields.code_qr').'', ['class' => 'control-label']) !!}
-                    {!! Form::file('code_qr', ['class' => 'form-control', 'style' => 'margin-top: 4px;']) !!}
-                    {!! Form::hidden('code_qr_max_size', 2) !!}
-                    {!! Form::hidden('code_qr_max_width', 4096) !!}
-                    {!! Form::hidden('code_qr_max_height', 4096) !!}
+                    {!! Form::label('code_qr', trans('Codigo QR').'*', ['class' => 'control-label']) !!}
+                    {!! Form::text('code_qr', old('code_qr'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('code_qr'))
                         <p class="help-block">
                             {{ $errors->first('code_qr') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('company', trans('Compañia').'*', ['class' => 'control-label']) !!}
+                    {!! Form::text('company', old('company'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('company'))
+                        <p class="help-block">
+                            {{ $errors->first('company') }}
                         </p>
                     @endif
                 </div>

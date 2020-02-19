@@ -2,18 +2,18 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('Baños')</h3>
+    <h3 class="page-title">@lang('Empleados')</h3>
     @can('property_create')
     <p>
-        <a href="{{ route('admin.baths.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
+        <a href="{{ route('admin.employees.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
         
     </p>
     @endcan
 
     <p>
         <ul class="list-inline">
-            <li><a href="{{ route('admin.baths.index') }}" style="{{ request('show_deleted') == 1 ? '' : 'font-weight: 700' }}">@lang('global.app_all')</a></li> |
-            <li><a href="{{ route('admin.baths.index') }}?show_deleted=1" style="{{ request('show_deleted') == 1 ? 'font-weight: 700' : '' }}">@lang('global.app_trash')</a></li>
+            <li><a href="{{ route('admin.employees.index') }}" style="{{ request('show_deleted') == 1 ? '' : 'font-weight: 700' }}">@lang('global.app_all')</a></li> |
+            <li><a href="{{ route('admin.employees.index') }}?show_deleted=1" style="{{ request('show_deleted') == 1 ? 'font-weight: 700' : '' }}">@lang('global.app_trash')</a></li>
         </ul>
     </p>
     
@@ -24,15 +24,16 @@
         </div>
 
         <div class="panel-body table-responsive">
-            <table class="table table-bordered table-striped {{ count($baths) > 0 ? 'datatable' : '' }} @can('property_delete') @if ( request('show_deleted') != 1 ) dt-select @endif @endcan">
+            <table class="table table-bordered table-striped {{ count($employees) > 0 ? 'datatable' : '' }} @can('property_delete') @if ( request('show_deleted') != 1 ) dt-select @endif @endcan">
                 <thead>
                     <tr>
                         @can('property_delete')
                             @if ( request('show_deleted') != 1 )<th style="text-align:center;"><input type="checkbox" id="select-all" /></th>@endif
                         @endcan
 
-                        <th>@lang('Codigo QR')</th>
-                        <th>@lang('Compañia')</th>
+                        <th>@lang('Nombre')</th>
+                        <th>@lang('Telefono')</th>
+                        <th>@lang('Usuario')</th>
                         @if( request('show_deleted') == 1 )
                         <th>&nbsp;</th>
                         @else
@@ -42,47 +43,49 @@
                 </thead>
                 
                 <tbody>
-                    @if (count($baths) > 0)
-                        @foreach ($baths as $bath)
-                            <tr data-entry-id="{{ $bath->id }}">
+                    @if (count($employees) > 0)
+                        @foreach ($employees as $employee)
+                            <tr data-entry-id="{{ $employee->id }}">
                                 @can('property_delete')
                                     @if ( request('show_deleted') != 1 )<td></td>@endif
                                 @endcan
 
-                                
-                                 <td field-key='code_qr'>{{ $bath->code_qr }}</td>
-                                 <td field-key='company'>{{ $bath->company }}</td>
+
+                                 <td field-key='name'>{{ $employee->name }}</td>
+                                 <td field-key='phone'>{{ $employee->phone }}</td>
+                                 <td field-key='user'>{{ $employee->user }}</td>
+
                                  @if( request('show_deleted') == 1 )
                                 <td>
                                     {!! Form::open(array(
                                         'style' => 'display: inline-block;',
                                         'method' => 'POST',
                                         'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
-                                        'route' => ['admin.baths.restore', $bath->id])) !!}
+                                        'route' => ['admin.employees.restore', $employee->id])) !!}
                                     {!! Form::submit(trans('global.app_restore'), array('class' => 'btn btn-xs btn-success')) !!}
                                     {!! Form::close() !!}
                                                                     {!! Form::open(array(
                                         'style' => 'display: inline-block;',
                                         'method' => 'DELETE',
                                         'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
-                                        'route' => ['admin.baths.perma_del', $bath->id])) !!}
+                                        'route' => ['admin.employees.perma_del', $employee->id])) !!}
                                     {!! Form::submit(trans('global.app_permadel'), array('class' => 'btn btn-xs btn-danger')) !!}
                                     {!! Form::close() !!}
                                                                 </td>
                                 @else
                                 <td>
                                     @can('property_view')
-                                    <a href="{{ route('admin.baths.show',[$bath->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
+                                    <a href="{{ route('admin.employees.show',[$employee->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
                                     @endcan
                                     @can('property_edit')
-                                    <a href="{{ route('admin.baths.edit',[$bath->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
+                                    <a href="{{ route('admin.employees.edit',[$employee->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
                                     @endcan
                                     @can('property_delete')
 {!! Form::open(array(
                                         'style' => 'display: inline-block;',
                                         'method' => 'DELETE',
                                         'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
-                                        'route' => ['admin.baths.destroy', $bath->id])) !!}
+                                        'route' => ['admin.employees.destroy', $employee->id])) !!}
                                     {!! Form::submit(trans('global.app_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
                                     {!! Form::close() !!}
                                     @endcan
@@ -104,7 +107,7 @@
 @section('javascript') 
     <script>
         @can('property_delete')
-            @if ( request('show_deleted') != 1 ) window.route_mass_crud_entries_destroy = '{{ route('admin.baths.mass_destroy') }}'; @endif
+            @if ( request('show_deleted') != 1 ) window.route_mass_crud_entries_destroy = '{{ route('admin.employees.mass_destroy') }}'; @endif
         @endcan
 
     </script>

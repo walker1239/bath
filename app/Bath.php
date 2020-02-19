@@ -16,7 +16,7 @@ class Bath extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['latitude', 'longitude', 'code_qr'];
+    protected $fillable = ['code_qr','company'];
     
     
     

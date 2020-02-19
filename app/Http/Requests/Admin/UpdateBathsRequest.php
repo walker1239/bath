@@ -24,9 +24,8 @@ class UpdateBathsRequest extends FormRequest
     {
         return [
             
-            'latitude' => 'required',
-            'longitude' => 'required',
-            'code_qr' => 'nullable|mimes:png,jpg,jpeg,gif',
+            'code_qr' => 'required',
+            'company' => 'required',
         ];
     }
 }

@@ -55,6 +55,16 @@ Route::group(['middleware' => ['auth', 'check_invitation'], 'prefix' => 'admin',
     Route::post('notes_mass_destroy', ['uses' => 'Admin\NotesController@massDestroy', 'as' => 'notes.mass_destroy']);
     Route::post('notes_restore/{id}', ['uses' => 'Admin\NotesController@restore', 'as' => 'notes.restore']);
     Route::delete('notes_perma_del/{id}', ['uses' => 'Admin\NotesController@perma_del', 'as' => 'notes.perma_del']);
+    
+    Route::resource('bathsusers', 'Admin\BathsusersController');
+    Route::post('bathsusers_mass_destroy', ['uses' => 'Admin\BathsusersController@massDestroy', 'as' => 'bathsusers.mass_destroy']);
+    Route::post('bathsusers_restore/{id}', ['uses' => 'Admin\BathsusersController@restore', 'as' => 'bathsusers.restore']);
+    Route::delete('bathsusers_perma_del/{id}', ['uses' => 'Admin\BathsusersController@perma_del', 'as' => 'bathsusers.perma_del']);
+    
+    Route::resource('employees', 'Admin\EmployeesController');
+    Route::post('employees_mass_destroy', ['uses' => 'Admin\EmployeesController@massDestroy', 'as' => 'employees.mass_destroy']);
+    Route::post('employees_restore/{id}', ['uses' => 'Admin\EmployeesController@restore', 'as' => 'employees.restore']);
+    Route::delete('employees_perma_del/{id}', ['uses' => 'Admin\EmployeesController@perma_del', 'as' => 'employees.perma_del']);
 
     Route::model('messenger', 'App\MessengerTopic');
     Route::get('messenger/inbox', 'Admin\MessengerController@inbox')->name('messenger.inbox');

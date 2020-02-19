@@ -58,6 +58,19 @@
                     @endif
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('company', trans('global.users.fields.company').'*', ['class' => 'control-label']) !!}
+                    {!! Form::text('company', old('company'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('company'))
+                        <p class="help-block">
+                            {{ $errors->first('company') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
             
         </div>
     </div>

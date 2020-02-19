@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Bath;
+use App\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreBathsRequest;
-use App\Http\Requests\Admin\UpdateBathsRequest;
+use App\Http\Requests\Admin\StoreEmployeesRequest;
+use App\Http\Requests\Admin\UpdateEmployeesRequest;
 use App\Http\Controllers\Traits\FileUploadTrait;
 
-class BathsController extends Controller
+class EmployeesController extends Controller
 {
     use FileUploadTrait;
 
     /**
-     * Display a listing of Bath.
+     * Display a listing of Employee.
      *
      * @return \Illuminate\Http\Response
      */
@@ -29,16 +29,16 @@ class BathsController extends Controller
             if (! Gate::allows('property_delete')) {
                 return abort(401);
             }
-            $baths = Bath::onlyTrashed()->get();
+            $employees = Employee::onlyTrashed()->get();
         } else {
-            $baths = Bath::all();
+            $employees = Employee::all();
         }
 
-        return view('admin.baths.index', compact('baths'));
+        return view('admin.employees.index', compact('employees'));
     }
-    
+      
    /**
-     * Show the form for creating new Bath.
+     * Show the form for creating new Employee.
      *
      * @return \Illuminate\Http\Response
      */
@@ -48,29 +48,31 @@ class BathsController extends Controller
             return abort(401);
         }
 
-        return view('admin.baths.create');
+        return view('admin.employees.create');
     }
 
         /**
-     * Store a newly created Bath in storage.
+     * Store a newly created Employee in storage.
      *
-     * @param  \App\Http\Requests\StoreBathsRequest $request
+     * @param  \App\Http\Requests\StoreEmployeesRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBathsRequest $request)
+    public function store(StoreEmployeesRequest $request)
     {
         if (! Gate::allows('property_create')) {
             return abort(401);
         }
 
         $request  = $this->saveFiles($request);
-        $baths = Bath::create($request->all());
+        $employees = Employee::create($request->all());
 
-        return redirect()->route('admin.baths.index');
+        return redirect()->route('admin.employees.index');
     }
+
     
+
     /**
-     * Show the form for editing Bath.
+     * Show the form for editing Employee.
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
@@ -81,34 +83,34 @@ class BathsController extends Controller
             return abort(401);
         }
 
-        $bath = Bath::findOrFail($id);
+        $employees = Employee::findOrFail($id);
 
-        return view('admin.baths.edit', compact('bath'));
+        return view('admin.employees.edit', compact('employees'));
     }
 
     /**
-     * Update Bath in storage.
+     * Update Employee in storage.
      *
-     * @param  \App\Http\Requests\UpdateBathsRequest $request
+     * @param  \App\Http\Requests\UpdateEmployeesRequest $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBathsRequest $request, $id)
+    public function update(UpdateEmployeesRequest $request, $id)
     {
         if (! Gate::allows('property_edit')) {
             return abort(401);
         }
 
         $request  = $this->saveFiles($request);
-        $bath = Bath::findOrFail($id);
-        $bath->update($request->all());
+        $employees = Employee::findOrFail($id);
+        $employees->update($request->all());
 
-        return redirect()->route('admin.baths.index');
+        return redirect()->route('admin.employees.index');
     }
 
 
     /**
-     * Display Bath.
+     * Display Employee.
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
@@ -119,14 +121,14 @@ class BathsController extends Controller
             return abort(401);
         }
 
-        $bath  = Bath::findOrFail($id);
+        $employees  = Employee::findOrFail($id);
 
-        return view('admin.baths.show', compact('bath'));
+        return view('admin.employees.show', compact('employees'));
     }
 
 
     /**
-     * Remove Bath from storage.
+     * Remove Employee from storage.
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
@@ -137,14 +139,14 @@ class BathsController extends Controller
             return abort(401);
         }
 
-        $bath = Bath::findOrFail($id);
-        $bath->delete();
+        $employees = Employee::findOrFail($id);
+        $employees->delete();
 
-        return redirect()->route('admin.baths.index');
+        return redirect()->route('admin.employees.index');
     }
 
     /**
-     * Delete all selected Bath at once.
+     * Delete all selected Employee at once.
      *
      * @param Request $request
      */
@@ -155,7 +157,7 @@ class BathsController extends Controller
         }
 
         if ($request->input('ids')) {
-            $entries = Bath::whereIn('id', $request->input('ids'))->get();
+            $entries = Employee::whereIn('id', $request->input('ids'))->get();
 
             foreach ($entries as $entry) {
                 $entry->delete();
@@ -165,7 +167,7 @@ class BathsController extends Controller
 
 
     /**
-     * Restore Bath from storage.
+     * Restore Employee from storage.
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
@@ -176,14 +178,14 @@ class BathsController extends Controller
             return abort(401);
         }
 
-        $bath = Bath::onlyTrashed()->findOrFail($id);
-        $bath->restore();
+        $employees = Employee::onlyTrashed()->findOrFail($id);
+        $employees->restore();
 
-        return redirect()->route('admin.baths.index');
+        return redirect()->route('admin.employees.index');
     }
 
     /**
-     * Permanently delete Bath from storage.
+     * Permanently delete Employee from storage.
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
@@ -194,11 +196,10 @@ class BathsController extends Controller
             return abort(401);
         }
 
-        $bath = Bath::onlyTrashed()->findOrFail($id);
-        $bath->forceDelete();
+        $employees = Employee::onlyTrashed()->findOrFail($id);
+        $employees->forceDelete();
 
-        return redirect()->route('admin.baths.index');
+        return redirect()->route('admin.employees.index');
     }
-
 
 }

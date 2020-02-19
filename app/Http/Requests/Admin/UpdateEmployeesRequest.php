@@ -3,7 +3,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreBathsRequest extends FormRequest
+class UpdateEmployeesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,9 @@ class StoreBathsRequest extends FormRequest
     public function rules()
     {
         return [
-            'code_qr' => 'required',
-            'company' => 'required',    
+            'name' => 'required',
+            'user' => 'required',
+
         ];
     }
 }

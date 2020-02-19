@@ -31,7 +31,7 @@
                         <a href="{{ route('admin.permissions.index') }}">
                             <i class="fa fa-briefcase"></i>
                             <span class="title">
-                                @lang('global.permissions.title')
+                                @lang('Permisos')
                             </span>
                         </a>
                     </li>
@@ -41,7 +41,7 @@
                         <a href="{{ route('admin.roles.index') }}">
                             <i class="fa fa-briefcase"></i>
                             <span class="title">
-                                @lang('global.roles.title')
+                                @lang('Roles')
                             </span>
                         </a>
                     </li>
@@ -51,7 +51,7 @@
                         <a href="{{ route('admin.users.index') }}">
                             <i class="fa fa-user"></i>
                             <span class="title">
-                                @lang('global.users.title')
+                                @lang('Usuarios')
                             </span>
                         </a>
                     </li>
@@ -60,6 +60,22 @@
             </li>
             @endcan
             @can('property_access')
+
+                <li class="{{ $request->segment(2) == 'bath' ? 'active' : '' }}">
+                    <a href="{{ route('admin.baths.index') }}">
+                        <i class="fa fa-gears"></i>
+                        <span class="title">@lang('Baños')</span>
+                    </a>
+                </li>
+                
+                <li class="{{ $request->segment(2) == 'employee' ? 'active' : '' }}">
+                    <a href="{{ route('admin.employees.index') }}">
+                        <i class="fa fa-gears"></i>
+                        <span class="title">@lang('Empleados')</span>
+                    </a>
+                </li>
+
+                {{--
                 <li class="{{ $request->segment(2) == 'properties' ? 'active' : '' }}">
                     <a href="{{ route('admin.properties.index') }}">
                         <i class="fa fa-gears"></i>
@@ -74,21 +90,17 @@
                     </a>
                 </li>
 
-                <li class="{{ $request->segment(2) == 'bath' ? 'active' : '' }}">
-                    <a href="{{ route('admin.baths.index') }}">
-                        <i class="fa fa-gears"></i>
-                        <span class="title">@lang('Baños')</span>
-                    </a>
-                </li>
 
+                
                 <li class="{{ $request->segment(2) == 'tenants' ? 'active' : '' }}">
                     <a href="{{ route('admin.tenants.index') }}">
                         <i class="fa fa-gears"></i>
                         <span class="title">@lang('global.tenants.title')</span>
                     </a>
                 </li>
+                --}}
             @endcan
-            
+            {{--
             @can('document_access')
             <li class="{{ $request->segment(2) == 'documents' ? 'active' : '' }}">
                 <a href="{{ route('admin.documents.index') }}">
@@ -97,18 +109,31 @@
                 </a>
             </li>
             @endcan
+            --}}
             
             @can('note_access')
+            {{--
             <li class="{{ $request->segment(2) == 'notes' ? 'active' : '' }}">
                 <a href="{{ route('admin.notes.index') }}">
                     <i class="fa fa-gears"></i>
                     <span class="title">@lang('global.notes.title')</span>
                 </a>
             </li>
+            --}}
+
+            <li class="{{ $request->segment(2) == 'bathsusers' ? 'active' : '' }}">
+                <a href="{{ route('admin.bathsusers.index') }}">
+                    <i class="fa fa-gears"></i>
+                    <span class="title">@lang('Baños Atendidos')</span>
+                </a>
+            </li>
+
             @endcan
             
 
             
+
+            {{--
 
             
             @php ($unread = App\MessengerTopic::countUnread())
@@ -128,6 +153,7 @@
                 }
             </style>
 
+            --}}
 
 
             <li class="{{ $request->segment(1) == 'change_password' ? 'active' : '' }}">
